@@ -1,20 +1,29 @@
 // bin/main.dart
 void main() {
-  double tinggiCm = 170;
-  double beratKg = 65;
+  List<Map<String, dynamic>> riwayat = [];
 
+  // Simulasi input & perhitungan BMI
+  hitungBMI(170, 65, riwayat);
+  hitungBMI(165, 75, riwayat);
+  hitungBMI(180, 85, riwayat);
+
+  // Tampilkan riwayat
+  tampilkanRiwayat(riwayat);
+}
+
+void hitungBMI(
+  double tinggiCm,
+  double beratKg,
+  List<Map<String, dynamic>> riwayat,
+) {
   if (tinggiCm <= 0 || beratKg <= 0) {
     print("Input tidak valid: tinggi dan berat harus lebih dari 0");
     return;
   }
 
-  // Konversi tinggi cm -> m
   double tinggiM = tinggiCm / 100;
-
-  // Hitung BMI
   double bmi = beratKg / (tinggiM * tinggiM);
 
-  // Tentukan kategori
   String kategori;
   if (bmi < 18.5) {
     kategori = "Kurus";
@@ -26,6 +35,21 @@ void main() {
     kategori = "Obesitas";
   }
 
-  print("Tinggi: $tinggiCm cm, Berat: $beratKg kg");
-  print("BMI: ${bmi.toStringAsFixed(2)} ($kategori)");
+  riwayat.add({
+    'tinggi': tinggiCm,
+    'berat': beratKg,
+    'bmi': bmi,
+    'kategori': kategori,
+  });
+}
+
+void tampilkanRiwayat(List<Map<String, dynamic>> riwayat) {
+  for (var data in riwayat) {
+    print(
+      "Tinggi: ${data['tinggi']} cm, "
+      "Berat: ${data['berat']} kg, "
+      "BMI: ${data['bmi'].toStringAsFixed(2)}, "
+      "Kategori: ${data['kategori']}",
+    );
+  }
 }
