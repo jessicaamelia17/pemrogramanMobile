@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 void main() {
   while (true) {
@@ -10,7 +11,7 @@ void main() {
 
     switch (pilihan) {
       case '1':
-        print("Game Tebak Angka (belum diimplementasi)");
+        gameTebakAngka();
         break;
       case '2':
         print("Terima kasih sudah bermain!");
@@ -19,4 +20,22 @@ void main() {
         print("Pilihan tidak valid, coba lagi!");
     }
   }
+}
+
+void gameTebakAngka() {
+  int angkaRahasia = Random().nextInt(10) + 1;
+  int tebakan;
+
+  do {
+    stdout.write("Tebak angka (1-10): ");
+    tebakan = int.parse(stdin.readLineSync()!);
+
+    if (tebakan < angkaRahasia) {
+      print("Terlalu kecil!");
+    } else if (tebakan > angkaRahasia) {
+      print("Terlalu besar!");
+    } else {
+      print("Selamat! Angka benar ($angkaRahasia).");
+    }
+  } while (tebakan != angkaRahasia);
 }
