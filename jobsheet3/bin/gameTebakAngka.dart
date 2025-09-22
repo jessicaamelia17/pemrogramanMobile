@@ -43,18 +43,25 @@ void gameTebakAngka() {
 
   // Loop hingga user menebak angka dengan benar atau kesempatan habis
   do {
-    stdout.write("Tebakan kamu: ");
+    stdout.write("Tebakan kamu (1-$maxRange): ");
     tebakan = int.parse(stdin.readLineSync()!);
+
+    // Validasi agar tebakan berada dalam range
+    if (tebakan < 1 || tebakan > maxRange) {
+      print("Tebakan harus di antara 1 dan $maxRange!");
+      continue; // Lewati percobaan jika input tidak valid
+    }
+
     percobaan++;
 
     if (tebakan < angkaRahasia) {
-      print("Terlalu kecil!"); // Jika tebakan terlalu kecil
+      print("Terlalu kecil!");
     } else if (tebakan > angkaRahasia) {
-      print("Terlalu besar!"); // Jika tebakan terlalu besar
+      print("Terlalu besar!");
     } else {
       print(
         "🎉 Selamat! Angka benar ($angkaRahasia) dalam $percobaan percobaan.",
-      ); // Jika tebakan benar
+      );
       return;
     }
   } while (percobaan < maxPercobaan);
